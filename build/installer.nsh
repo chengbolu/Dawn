@@ -1,6 +1,23 @@
 ; Keep launcher-local Minecraft instances and saves when NSIS removes or upgrades the app.
 ; The temporary sibling stays on the same drive, so even very large game folders are renamed
 ; atomically instead of copied through the system drive.
+!macro customUnInstall
+  ; Upgrades reuse the uninstaller internally. Only ask during an explicit interactive uninstall,
+  ; and preserve user data by default for silent/unattended removal.
+  ${ifNot} ${isUpdated}
+    ${ifNot} ${Silent}
+      IfFileExists "$APPDATA\KAMUCL\*.*" 0 user_data_done
+      MessageBox MB_YESNO|MB_ICONQUESTION "是否同时删除 DCL 用户数据？$\r$\n$\r$\n将删除账户登录信息、启动器设置与缓存：$\r$\n$APPDATA\KAMUCL$\r$\n$\r$\n安装目录中的 .minecraft 游戏实例与存档不会被删除。" IDNO user_data_done
+      ClearErrors
+      RMDir /r "$APPDATA\KAMUCL"
+      IfErrors 0 user_data_done
+      MessageBox MB_OK|MB_ICONEXCLAMATION "部分用户数据无法删除，可能仍被其他程序占用：$\r$\n$APPDATA\KAMUCL"
+
+user_data_done:
+    ${endif}
+  ${endif}
+!macroend
+
 !macro customRemoveFiles
   IfFileExists "$INSTDIR\.minecraft\*.*" preserve_minecraft remove_launcher
 

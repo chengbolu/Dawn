@@ -1022,11 +1022,8 @@ export const IPC_EVENT = {
   updateReady: 'event:updateReady' // (r: { version: string })  更新已下载校验就绪，关闭启动器时自动安装
 } as const
 
-/**
- * 默认微软登录 client_id：Prism Launcher 注册的公开 Azure 应用，
- * 已在 consumers 租户实测支持 device code 流程；可在设置中替换为自注册应用
- */
-export const DEFAULT_MS_CLIENT_ID = 'c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb'
+/** Dawn Craft Launcher 自有且已获 Minecraft 登录授权的 Microsoft OAuth client_id。 */
+export const DEFAULT_MS_CLIENT_ID = 'ff7590ef-23c2-49e3-99f0-49b757eb0b1b'
 
 // ---------------- 社区资源 ----------------
 export type CommunityKind = 'mod' | 'modpack' | 'resourcepack' | 'shader' | 'datapack'

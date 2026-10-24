@@ -153,8 +153,15 @@ export function getSettings(): Settings {
     c.resolution = resolutionValidationError(migratedResolution)
       ? def.resolution
       : migratedResolution
-    // 迁移：旧版默认 client_id（Mojang legacy 应用，不支持 device code）→ 新默认
-    if (c.msClientId === '00000000402b5328') c.msClientId = def.msClientId
+    // 迁移历史内置 ID：Mojang legacy 与 Prism Launcher 均替换为 DCL 自有应用 ID。
+    const storedMsClientId = c.msClientId
+    if ([
+      '00000000402b5328',
+      'c36a9fb6-4f2a-41ff-90bd-ae7cc92031eb',
+      '06cc8cf6-4b8f-4631-8459-b2bd828808f8'
+    ].includes(c.msClientId)) {
+      c.msClientId = def.msClientId
+    }
     // 保证 activeFolder 指向已登记文件夹；gameDir 与 activeFolder 保持一致语义
     if (!c.folders.some((f) => f.path === c.activeFolder)) {
       c.activeFolder = c.folders.find((f) => f.isDefault)?.path ?? c.folders[0].path
@@ -166,6 +173,7 @@ export function getSettings(): Settings {
       c.theme !== raw.theme ||
       c.background.image !== storedBackground ||
       c.launchThumbnail.image !== storedThumbnail ||
+      c.msClientId !== storedMsClientId ||
       c.configVersion !== raw.configVersion
     ) {
       try {

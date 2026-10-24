@@ -1,7 +1,7 @@
 {
   "name": "kamucl",
   "productName": "Dawn Craft Launcher",
-  "version": "1.1.20",
+  "version": "1.1.21",
   "description": "Dawn Craft Launcher - 简约美观的一键式 Minecraft 启动器",
   "main": "out/main/index.js",
   "scripts": {
