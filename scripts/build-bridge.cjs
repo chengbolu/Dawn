@@ -8,7 +8,7 @@ const hash=file=>crypto.createHash('sha256').update(fs.readFileSync(file)).diges
 async function main(){
  const cp=[]
  for(const dep of dependencies){const file=path.join(bridge,'.cache',path.basename(dep.file));fs.mkdirSync(path.dirname(file),{recursive:true});if(!fs.existsSync(file)||hash(file)!==dep.hash){
-   const local=process.env.KAMUCL_BUILD_LIBS&&path.join(process.env.KAMUCL_BUILD_LIBS,dep.file)
+   const local=process.env.DCL_BUILD_LIBS&&path.join(process.env.DCL_BUILD_LIBS,dep.file)
    if(local&&fs.existsSync(local)&&hash(local)===dep.hash)fs.copyFileSync(local,file)
    else{const response=await fetch(dep.base+dep.file);if(!response.ok)throw new Error(`Build dependency HTTP ${response.status}`);const data=Buffer.from(await response.arrayBuffer());if(crypto.createHash('sha256').update(data).digest('hex')!==dep.hash)throw new Error('Build dependency checksum mismatch');fs.writeFileSync(file,data)}
  }cp.push(file)}

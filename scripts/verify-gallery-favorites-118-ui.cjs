@@ -1,7 +1,7 @@
 // Run through verify-ui-refinement's isolated Electron profile. Never touches user games/accounts.
 const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict'),crypto=require('node:crypto');
 module.exports=async({call,evaluate,main,click,nav,screenshot,wait,root,profile,version})=>{
- const theme=process.env.KAMUCL_TEST_THEME||'black-orange',proof={version,theme,complete:false,readiness:[],checks:[]},proofPath=`out/gallery-favorites-118-ui-${theme}.json`;
+ const theme=process.env.DCL_TEST_THEME||'black-orange',proof={version,theme,complete:false,readiness:[],checks:[]},proofPath=`out/gallery-favorites-118-ui-${theme}.json`;
  const saveProof=()=>fs.writeFileSync(proofPath,JSON.stringify(proof,null,2));
  const ready=async(label,expression,mainExpression)=>{
   const trace={label,samples:[]};proof.readiness.push(trace);let sample;

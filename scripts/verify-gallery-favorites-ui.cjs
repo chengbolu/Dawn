@@ -89,5 +89,5 @@ module.exports=async({call,evaluate,main,click,nav,screenshot,wait,root,profile,
   await call('Emulation.setEmulatedMedia',{features:[]});await wait(80);motionPreference.restored=await motionSnapshot();
   writeLiveProof();
  }
- fs.writeFileSync('out/gallery-favorites-ui-'+(process.env.KAMUCL_TEST_THEME||'black-orange')+'.json',JSON.stringify({...result,motionPreference,motionReadiness,favoriteReadiness},null,2));console.log('Gallery and external favorites GUI checks passed');
+ fs.writeFileSync('out/gallery-favorites-ui-'+(process.env.DCL_TEST_THEME||'black-orange')+'.json',JSON.stringify({...result,motionPreference,motionReadiness,favoriteReadiness},null,2));console.log('Gallery and external favorites GUI checks passed');
 };

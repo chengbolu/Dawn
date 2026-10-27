@@ -111,7 +111,7 @@ async function fetchDataUrl(url: string): Promise<string | undefined> {
       return `data:image/png;base64,${buf.toString('base64')}`
     } catch (e) {
       if (attempt === 1) {
-        console.error(`[KAMUCL] 皮肤纹理下载失败(${url}):`, e instanceof Error ? e.message : e)
+        console.error(`[DCL] 皮肤纹理下载失败(${url}):`, e instanceof Error ? e.message : e)
         appendLauncherLog(`皮肤纹理下载失败(${url}): ${e instanceof Error ? e.message : e}`)
       }
     }
@@ -287,7 +287,7 @@ function persistHistory(): void {
     fs.mkdirSync(skinsDir(), { recursive: true })
     fs.writeFileSync(historyFile(), JSON.stringify(loadHistory(), null, 2), 'utf-8')
   } catch (e) {
-    console.error('[KAMUCL] 皮肤历史写入失败:', e)
+    console.error('[DCL] 皮肤历史写入失败:', e)
   }
 }
 
@@ -319,7 +319,7 @@ function saveHistory(buf: Buffer, variant: SkinVariant, sourceName?: string): vo
     fs.mkdirSync(skinsDir(), { recursive: true })
     fs.writeFileSync(path.join(skinsDir(), `${id}.png`), buf)
   } catch (e) {
-    console.error('[KAMUCL] 皮肤历史保存失败:', e)
+    console.error('[DCL] 皮肤历史保存失败:', e)
     return
   }
   list.unshift({ id, variant, time: Date.now(), name: sourceName || undefined, hash })

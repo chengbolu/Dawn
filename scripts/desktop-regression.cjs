@@ -7,7 +7,7 @@ const os = require('node:os')
 const path = require('node:path')
 const AdmZip = require('adm-zip')
 const qaVersion = require('../package.json').version
-const qaRoot = process.env.KAMUCL_QA_UI_ROOT || fs.mkdtempSync(path.join(os.tmpdir(), `kamucl-regression-${qaVersion}-`))
+const qaRoot = process.env.DCL_QA_UI_ROOT || fs.mkdtempSync(path.join(os.tmpdir(), `kamucl-regression-${qaVersion}-`))
 if (path.dirname(path.resolve(qaRoot)).toLowerCase() !== path.resolve(os.tmpdir()).toLowerCase() || !path.basename(qaRoot).startsWith('kamucl-regression-')) throw new Error('QA root must be an owned temporary directory')
 const report = path.join(qaRoot, 'qa-ui.log')
 for (const name of ['log', 'error', 'info']) { const output = console[name].bind(console); console[name] = (...args) => { fs.appendFileSync(report, args.map(String).join(' ') + '\n'); output(...args) } }
@@ -83,7 +83,7 @@ app.on('browser-window-created', (_event, window) => {
   if (window.getTitle().includes('正在启动')) return
   if (process.argv.includes('--qa-small')) window.setSize(960, 620)
   window.on('show', () => {
-    window.setTitle(`KAMUCL ${qaVersion} · 回归验收`)
+    window.setTitle(`DCL ${qaVersion} · 回归验收`)
     window.webContents.executeJavaScript(`JSON.stringify({width:innerWidth,height:innerHeight,dpr:devicePixelRatio,overflow:document.documentElement.scrollWidth>innerWidth,hero:document.querySelector('.hero')?.getBoundingClientRect().toJSON(),instances:[...document.querySelectorAll('.instance-copy strong')].map(e=>({text:e.textContent,width:e.getBoundingClientRect().width,height:e.getBoundingClientRect().height}))})`).then(value=>console.log('QA_LAYOUT='+value))
   })
   window.webContents.on('before-input-event', (_event, input) => {

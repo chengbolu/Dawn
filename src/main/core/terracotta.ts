@@ -1,7 +1,7 @@
 import { pipeline } from 'node:stream/promises'
 import { promisify } from 'node:util'
 /**
- * terracotta.ts — 陶瓦联机（Terracotta）官方工具集成（KAMUCL）
+ * terracotta.ts — 陶瓦联机（Terracotta）官方工具集成（DCL）
  *
  * 移植自 VoxLink MOD 的集成方式（fabric/26.2/.../terracotta/*）：
  *  - 官方渠道下载 terracotta-<ver>-windows-<arch>-pkg.tar.gz（多镜像回退）→ SHA-256 校验 → 解出 exe
@@ -338,7 +338,7 @@ async function tcStart(payload: { mode: 'host' | 'join'; code?: string; port?: n
     setState({ phase: 'starting' })
     await startProcess()
     if (generation !== operation) return { ...state }
-    const me = payload.playerName || 'KAMUCL'
+    const me = payload.playerName || 'DCL'
     if (payload.mode === 'host') {
       setState({ phase: 'hosting', room: undefined, url: undefined, error: undefined })
       await tcGet(`/state/scanning?player=${encodeURIComponent(me)}`)

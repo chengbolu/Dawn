@@ -8,7 +8,7 @@ import { mcVersionAtLeast } from '../../shared/keybindings'
 
 const root = () => path.join(app.getPath('userData'), 'default-resourcepacks')
 const manifest = () => path.join(root(), 'packs.json')
-const managedName = (p: DefaultResourcePack) => `KAMUCL-default-${p.id}-${p.name}`
+const managedName = (p: DefaultResourcePack) => `DCL-default-${p.id}-${p.name}`
 function save(packs: DefaultResourcePack[]): DefaultResourcePack[] {
   fs.mkdirSync(root(), { recursive: true })
   fs.writeFileSync(manifest() + '.tmp', JSON.stringify(packs, null, 2))

@@ -2,7 +2,7 @@
 const fs=require('fs'),path=require('path'),assert=require('assert/strict'),crypto=require('crypto');
 module.exports=async({call,evaluate,main,click,nav,screenshot,wait,root,profile,games,other,version})=>{
  await main("testElectron.BrowserWindow.getAllWindows()[0].setSize(1280,900)");
- const readiness=[],proofPath='out/extension-ui-'+(process.env.KAMUCL_TEST_THEME||'black-orange')+'.json';
+ const readiness=[],proofPath='out/extension-ui-'+(process.env.DCL_TEST_THEME||'black-orange')+'.json';
  const writeReadiness=()=>fs.writeFileSync(proofPath,JSON.stringify({version,root,complete:false,readiness},null,2));
  const ready=async(label,expression,mainExpression)=>{
   const proof={label,samples:[]};readiness.push(proof);const deadline=Date.now()+6000;let sample;

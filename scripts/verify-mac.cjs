@@ -4,7 +4,7 @@ const appPath=path.resolve(process.argv[2]),arch=process.argv[3],version=require
 assert.equal(process.platform,'darwin');assert.equal(process.arch,arch)
 const mascotProofRevision=version==='1.1.9'?'119':'118',mascotRecordingKind=version==='1.1.9'?'logo':'leader'
 const stage=process.argv[4]||(appPath.split(path.sep).includes('dmg-mount')?'dmg':'app');assert(['app','dmg'].includes(stage),'proof stage must be app or dmg')
-const exe=path.join(appPath,'Contents/MacOS/KAMUCL'),proof=path.resolve(`release/mac-proof-${arch}-${stage}`)
+const exe=path.join(appPath,'Contents/MacOS/DCL'),proof=path.resolve(`release/mac-proof-${arch}-${stage}`)
 fs.mkdirSync(proof,{recursive:true})
 const binary=execFileSync('file',[exe],{encoding:'utf8'});assert(binary.includes(arch==='x64'?'x86_64':'arm64'))
 const env={...process.env};delete env.ELECTRON_RUN_AS_NODE
@@ -138,9 +138,9 @@ main().finally(async()=>{
  try{
   // Separate disposable process starts native mascot audio cold, without the full
   // header's MediaRecorder/tap hooks. Preserve its diagnostic evidence separately.
-  if(version==='1.1.9')execFileSync(process.execPath,['scripts/verify-ui-refinement.cjs'],{env:{...env,KAMUCL_GUI_APP:exe,KAMUCL_EXTENSION_GUI:'1',KAMUCL_EXTENSION_ONLY:'1',KAMUCL_SKIP_EXTENSION_BASE:'1',KAMUCL_UI_MODULE:'motion119',KAMUCL_TEST_THEME:'black-orange'},stdio:'inherit',timeout:180000})
+  if(version==='1.1.9')execFileSync(process.execPath,['scripts/verify-ui-refinement.cjs'],{env:{...env,DCL_GUI_APP:exe,DCL_EXTENSION_GUI:'1',DCL_EXTENSION_ONLY:'1',DCL_SKIP_EXTENSION_BASE:'1',DCL_UI_MODULE:'motion119',DCL_TEST_THEME:'black-orange'},stdio:'inherit',timeout:180000})
   execFileSync(process.execPath,['scripts/verify-ui-refinement.cjs'],{
-   env:{...env,KAMUCL_GUI_APP:exe,KAMUCL_EXTENSION_GUI:'1',KAMUCL_EXTENSION_ONLY:'1',KAMUCL_TEST_THEME:'black-orange'},
+   env:{...env,DCL_GUI_APP:exe,DCL_EXTENSION_GUI:'1',DCL_EXTENSION_ONLY:'1',DCL_TEST_THEME:'black-orange'},
    stdio:'inherit',timeout:480000
   })
   for(const name of requiredProofs){const file=path.join('out',name);assert(fresh(file),'successful GUI run is missing current proof '+name);const result=JSON.parse(fs.readFileSync(file));assert.equal(result.version,version,'GUI proof must match this build: '+name);if('complete' in result)assert.equal(result.complete,true,'GUI proof must be complete: '+name)}

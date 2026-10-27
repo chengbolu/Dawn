@@ -9,12 +9,12 @@ const archive = path.resolve(process.argv[2] || 'release/win-unpacked/resources/
 const packedRequire = createRequire(path.join(archive, 'package.json'))
 const version = packedRequire('./package.json').version
 const compact = !fs.existsSync(path.join(path.dirname(process.execPath), 'dxcompiler.dll'))
-const mode = process.env.KAMUCL_TEST_SOFTWARE === '1' ? 'software' : 'hardware'
+const mode = process.env.DCL_TEST_SOFTWARE === '1' ? 'software' : 'hardware'
 if (mode === 'software') {
   app.commandLine.appendSwitch('use-angle', 'swiftshader')
   app.commandLine.appendSwitch('enable-unsafe-swiftshader')
 }
-const root = fs.mkdtempSync(path.join(os.tmpdir(), 'KAMUCL packaged UI '))
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'DCL packaged UI '))
 const games = path.join(root, 'games'); fs.mkdirSync(games)
 app.setPath('userData', root)
 app.setPath('appData', root)
@@ -28,7 +28,7 @@ app.whenReady().then(() => {
 })
 app.on('browser-window-created', (_event, window) => {
   window.show = () => {}; window.showInactive = () => {}
-  if (window.getTitle() !== 'KAMUCL') return
+  if (window.getTitle() !== 'DCL') return
   window.webContents.once('did-finish-load', async () => {
     try {
       let ui

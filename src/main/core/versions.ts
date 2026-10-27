@@ -111,30 +111,30 @@ export interface VersionJson {
   javaVersion?: { majorVersion: number }
   libraries?: Library[]
   downloads?: { client?: LibraryArtifact }
-  /** KAMUCL 自定义字段：加载器版本标记 */
+  /** DCL 自定义字段：加载器版本标记 */
   _loader?: 'forge' | 'fabric' | 'quilt' | 'neoforge'
   _loaderVersion?: string
-  /** KAMUCL 自定义字段：实例隔离（启动时游戏目录 = 本版本目录） */
+  /** DCL 自定义字段：实例隔离（启动时游戏目录 = 本版本目录） */
   _gameDir?: boolean
   /** 兼容已有实例描述的显式游戏目录。 */
   gameDirectory?: string
   _gameDirectory?: string
-  /** KAMUCL 自定义字段：来源整合包名称/版本 */
+  /** DCL 自定义字段：来源整合包名称/版本 */
   _modpackName?: string
   _modpackVersion?: string
-  /** KAMUCL 自定义字段：版本独立指定 Java 路径 */
+  /** DCL 自定义字段：版本独立指定 Java 路径 */
   _javaPath?: string
   _javaAuto?: boolean
-  /** KAMUCL 自定义字段：实例级窗口设置覆盖。 */
+  /** DCL 自定义字段：实例级窗口设置覆盖。 */
   _resolution?: GameResolution
-  /** KAMUCL 自定义字段：自定义命名的原版实例记录其真实 MC 版本 id（修复/推断用） */
+  /** DCL 自定义字段：自定义命名的原版实例记录其真实 MC 版本 id（修复/推断用） */
   _mcVersion?: string
-  /** KAMUCL 自定义字段：实例图标（'mob:<内置id>' / 'file:<自定义文件名>'） */
+  /** DCL 自定义字段：实例图标（'mob:<内置id>' / 'file:<自定义文件名>'） */
   _icon?: string
-  /** KAMUCL 自定义字段：首页启动卡专属缩略图（受管绝对路径）。 */
+  /** DCL 自定义字段：首页启动卡专属缩略图（受管绝对路径）。 */
   _thumbnail?: string
   _thumbnailFit?: ImageFit
-  /** KAMUCL 自定义字段：已拍平为自包含实例（合并继承链完成时间），不再依赖基础原版 */
+  /** DCL 自定义字段：已拍平为自包含实例（合并继承链完成时间），不再依赖基础原版 */
   _flattenedAt?: string
 }
 
@@ -955,7 +955,7 @@ export function setVersionThumbnail(id: string, imagePath: string, fit: ImageFit
   if (!['fill', 'fit', 'crop'].includes(fit)) throw new Error('非法的缩略图显示方式')
   const folder = folderOfVersion(id)
   const managed = ensureInstanceThumbnail(imagePath, folder)
-  if (!managed) throw new Error('缩略图不在 KAMUCL 受管目录中或图片已损坏')
+  if (!managed) throw new Error('缩略图不在 DCL 受管目录中或图片已损坏')
   const jsonPath = versionJsonPath(id)
   const version = readVersionJson(id)
   const previous = version._thumbnail

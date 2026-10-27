@@ -4,7 +4,7 @@ import type { ReleaseInfo } from '../../shared/types'
 
 /** 测试覆盖只能用于开发进程，且必须同时指定独立数据目录和模拟 API。 */
 export function isolatedUpdateTest(): boolean {
-  return app?.isPackaged !== true && !!process.env.KAMUCL_USERDATA_DIR && !!process.env.KAMUCL_UPDATE_API_BASE
+  return app?.isPackaged !== true && !!process.env.DCL_USERDATA_DIR && !!process.env.DCL_UPDATE_API_BASE
 }
 
 export function trustedUpdateRelease(release: ReleaseInfo | undefined): boolean {
@@ -16,5 +16,5 @@ export function trustedUpdateRelease(release: ReleaseInfo | undefined): boolean 
 }
 
 export function updateAssetName(version: string, platform = process.platform, arch = process.arch): string {
-  return platform === 'darwin' ? `KAMUCL-${version}-mac-${arch}.zip` : `KAMUCL-${version}.exe`
+  return platform === 'darwin' ? `DCL-${version}-mac-${arch}.zip` : `DCL-${version}.exe`
 }

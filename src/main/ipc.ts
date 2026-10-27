@@ -926,7 +926,7 @@ export function registerIpc(getWin: () => BrowserWindow | null): void {
     const opts = {
       properties: ['openFile' as const],
       title: '选择插件（.js 文件）',
-      filters: [{ name: 'KAMUCL 插件', extensions: ['js'] }]
+      filters: [{ name: 'DCL 插件', extensions: ['js'] }]
     }
     const r = win ? await dialog.showOpenDialog(win, opts) : await dialog.showOpenDialog(opts)
     if (r.canceled || !r.filePaths[0]) return plugins.listPlugins()

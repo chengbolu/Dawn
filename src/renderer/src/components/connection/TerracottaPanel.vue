@@ -152,7 +152,7 @@ onUnmounted(() => { offEvent?.() })
       <div data-ui="TerracottaPanel:206e7b16e50e" v-if="hosting && status?.room" class="room-card" :class="{ ok: status.phase === 'ready' }">
         <p data-ui="TerracottaPanel:1bd0e99be803" class="room-label">房间码（发给好友）</p>
         <p data-ui="TerracottaPanel:56648d11bc2e" class="room-code"><code>{{ status.room }}</code><button data-ui="TerracottaPanel:20b2d500a6d2" class="btn btn-ghost copy-mini" :disabled="!status.room" @click="copy(status.room)">复制房间码</button></p>
-        <p class="connection-muted">把 U/ 开头的房间码发给好友（官方四段格式）。好友既可以用 KAMUCL 加入，也可以在陶瓦联机官方工具里输入。</p>
+        <p class="connection-muted">把 U/ 开头的房间码发给好友（官方四段格式）。好友既可以用 DCL 加入，也可以在陶瓦联机官方工具里输入。</p>
         <div class="connection-actions"><button class="btn btn-ghost" :disabled="busy" @click="stop">关闭房间</button></div>
       </div>
 
@@ -191,7 +191,7 @@ onUnmounted(() => { offEvent?.() })
         <div class="op-card">
           <h3>创建房间</h3>
           <p class="connection-muted">先启动游戏并对局域网开放世界；陶瓦会自动完成其余工作，房间码会出现在上方「连接状态」。</p>
-          <label class="connection-field">游戏内名字<input data-ui="TerracottaPanel:6810d6fb09db" v-model="playerName" class="input" maxlength="16" placeholder="可选，默认 KAMUCL" /></label>
+          <label class="connection-field">游戏内名字<input data-ui="TerracottaPanel:6810d6fb09db" v-model="playerName" class="input" maxlength="16" placeholder="可选，默认 DCL" /></label>
           <div class="connection-actions">
             <button data-ui="TerracottaPanel:f0d7559a0af1" class="btn btn-gold main-btn" :disabled="busy || status?.running || !status?.binaryReady" @click="mode = 'host'; start()">{{ busy && mode === 'host' ? '处理中…' : '创建陶瓦房间' }}</button>
           </div>

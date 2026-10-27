@@ -131,7 +131,7 @@ async function pickImage() {
     if (settings) {
       store.settings = settings
       backgroundPreviewFailed.value = false
-      toast('背景已复制并优化到 KAMUCL 资源目录', 'success')
+      toast('背景已复制并优化到 DCL 资源目录', 'success')
     }
   } catch (e) {
     toast('导入背景失败：' + errText(e), 'error')
@@ -276,7 +276,7 @@ function setLaunchFit(fit: ImageFit) {
           {{ importingBackgroundMulti ? '处理中…' : '添加多张（可多选）…' }}
         </button>
         <span data-ui="HomeLayoutEditor:a0ee9d306678" class="muted bg-img-path" :title="store.settings.background.image">
-          {{ store.settings.background.image ? '已由 KAMUCL 管理' : '未选择' }}
+          {{ store.settings.background.image ? '已由 DCL 管理' : '未选择' }}
         </span>
       </div>
       <ol data-ui="HomeLayoutEditor:e28f1ea34df0" v-if="bgImageList.length > 1" class="carousel-list" aria-label="背景图切换列表">
@@ -412,7 +412,7 @@ function setLaunchFit(fit: ImageFit) {
       </li>
     </ol>
   </div></details>
-  <ConfirmModal :open="!!removeThumbnail" title="移除自定义启动卡图片" message="将删除 KAMUCL 管理的图片副本，原文件不受影响。若只想暂停轮播，请取消参与勾选。" confirm-text="移除文件" :busy="removingThumbnail" @confirm="deleteThumbnail" @cancel="removeThumbnail = null" />
+  <ConfirmModal :open="!!removeThumbnail" title="移除自定义启动卡图片" message="将删除 DCL 管理的图片副本，原文件不受影响。若只想暂停轮播，请取消参与勾选。" confirm-text="移除文件" :busy="removingThumbnail" @confirm="deleteThumbnail" @cancel="removeThumbnail = null" />
 </template>
 
 <style scoped>

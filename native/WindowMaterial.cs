@@ -1,4 +1,4 @@
-// Complete KAMUCL's native startup fade without changing DWM or window geometry.
+// Complete DCL's native startup fade without changing DWM or window geometry.
 using System;
 using System.Runtime.InteropServices;
 

@@ -2,13 +2,13 @@
 const { app } = require('electron')
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os'), assert = require('node:assert/strict')
 const original = JSON.parse(fs.readFileSync(path.join(app.getPath('appData'), 'kamucl', 'settings.json'), 'utf8'))
-const qa = process.env.KAMUCL_QA_RESUME || fs.mkdtempSync(path.join(os.tmpdir(), 'kamucl-quick-actions-'))
+const qa = process.env.DCL_QA_RESUME || fs.mkdtempSync(path.join(os.tmpdir(), 'kamucl-quick-actions-'))
 if (path.dirname(path.resolve(qa)).toLowerCase() !== path.resolve(os.tmpdir()).toLowerCase() || !path.basename(qa).startsWith('kamucl-quick-actions-')) throw new Error('QA resume must be an owned temp fixture')
 const report = path.join(qa, 'qa-report.log')
 for (const name of ['log', 'error']) { const originalLog = console[name].bind(console); console[name] = (...args) => { fs.appendFileSync(report, args.map(a => a instanceof Error ? a.stack : String(a)).join(' ') + '\n'); originalLog(...args) } }
-const folder = path.join(qa, 'games'); let id = process.env.KAMUCL_QA_VERSION || '26.2'
-const installNeo = process.env.KAMUCL_QA_INSTALL_NEO
-const sourceRoots = [...(process.env.KAMUCL_QA_SOURCE_ROOT ? [process.env.KAMUCL_QA_SOURCE_ROOT] : []), ...original.folders.map(f => f.path)]
+const folder = path.join(qa, 'games'); let id = process.env.DCL_QA_VERSION || '26.2'
+const installNeo = process.env.DCL_QA_INSTALL_NEO
+const sourceRoots = [...(process.env.DCL_QA_SOURCE_ROOT ? [process.env.DCL_QA_SOURCE_ROOT] : []), ...original.folders.map(f => f.path)]
 const source = sourceRoots.map(root => path.join(root, 'versions', id)).find(p => fs.existsSync(path.join(p, id + '.jar')) && fs.existsSync(path.join(p, id + '.json')))
 if (!source && !installNeo) throw new Error('Missing runtime fixture ' + id)
 const dest = path.join(folder, 'versions', id)
@@ -45,7 +45,7 @@ app.whenReady().then(async () => {
       lines.push(line)
       if (/joined the game|logged in with entity/i.test(line)) joined++
       if (/Saving chunks|All dimensions are saved|Saving worlds/i.test(line)) saved++
-      if (/KAMUCL|ERROR|Exception|joined the game|Saving worlds|dimensions are saved/.test(line)) console.log(line.slice(0, 350))
+      if (/DCL|ERROR|Exception|joined the game|Saving worlds|dimensions are saved/.test(line)) console.log(line.slice(0, 350))
     }, state => { states.push(state.status); console.log('STATE=' + state.status) }, undefined, { createCommandWorld: true }))
     await waitUntil(() => { if (states.includes('exited') && !joined) throw new Error('Game exited before entering test world'); return joined > 0 })
     console.log('PASS_ENTERED_NEW_WORLD')

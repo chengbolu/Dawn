@@ -32,7 +32,7 @@
 | 📰 Minecraft 资讯 | 获取并缓存 Minecraft 官方最新资讯，支持浏览器打开原文 |
 | 🧁 皮肤衣柜 | 角色预览、皮肤与披风上传、历史记录 |
 | 🤝 联机 | FRP、VoxLink、Terracotta 和好友直连 |
-| 🛠️ MOD 面板 | 通过 KAMUCL Bridge 实时读取与修改 MOD 参数 |
+| 🛠️ MOD 面板 | 通过 DCL Bridge 实时读取与修改 MOD 参数 |
 | ✨ 个性化 | 主题、背景、快捷键、插件和启动页缩略图 |
 | 🩺 诊断 | 下载任务、日志导出与启动诊断 |
 
@@ -61,7 +61,7 @@ Windows 版提供安装包、单文件便携版和 ZIP，文件名会跟随 `pac
 
 ```text
 Dawn-Craft-Launcher-<version>-Setup.exe
-release/KAMUCL-<version>.exe
+release/DCL-<version>.exe
 ```
 
 首次启动 Minecraft 前，请准备 Windows 10/11 64 位或支持的 macOS、与目标 Minecraft 版本匹配的 Java（现代版本通常需要 Java 17+）和网络连接。Windows ZIP 包解压后需保留同目录下的全部文件。
@@ -70,7 +70,7 @@ release/KAMUCL-<version>.exe
 
 ```powershell
 git clone https://github.com/chengbolu/Dawn.git
-cd KAMUCL
+cd DCL
 npm install
 npm run dev
 ```
@@ -131,7 +131,7 @@ docs/           功能说明、构建说明与版本验证记录
 
 ## 💾 数据、日志与隐私
 
-Minecraft 实例、版本、资源和存档默认放在启动器安装目录旁的 `.minecraft` 中，便于随启动器一起迁移。账号、设置、缓存和日志继续保存在 Windows 的 `%APPDATA%\KAMUCL`（macOS 为 `~/Library/Application Support/KAMUCL`），以兼容已有用户数据。反馈问题时，请先隐藏账号令牌、个人路径和公网 IP。
+Minecraft 实例、版本、资源和存档默认放在启动器安装目录旁的 `.minecraft` 中，便于随启动器一起迁移。账号、设置、缓存和日志继续保存在 Windows 的 `%APPDATA%\DCL`（macOS 为 `~/Library/Application Support/DCL`），以兼容已有用户数据。反馈问题时，请先隐藏账号令牌、个人路径和公网 IP。
 
 ## ❓ 常见问题
 

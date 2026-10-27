@@ -1,6 +1,6 @@
 const assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path')
 module.exports=async function verifyKamuLogo(h){
- const {call,evaluate,main,nav,screenshot,wait,version,recordScreencast}=h,theme=process.env.KAMUCL_TEST_THEME||'black-orange'
+ const {call,evaluate,main,nav,screenshot,wait,version,recordScreencast}=h,theme=process.env.DCL_TEST_THEME||'black-orange'
  const proof={version,complete:false,checks:[],bufferInitialization:{classification:'independent real silent-slap-buffer events and zero-Gain graph, separate from palm samples/played/voices',readiness:[]},hardwareListening:'not performed',source:'trusted CDP mouse/keyboard, real main IPC and original compositor frames'}
  const saveProof=()=>fs.writeFileSync('out/mascot-header-ui-'+theme+'.json',JSON.stringify(proof,null,2))
  const trustedClick=async selector=>{const r=await evaluate(`(()=>{const e=document.querySelector(${JSON.stringify(selector)});if(!e)throw Error('Missing '+${JSON.stringify(selector)});const r=e.getBoundingClientRect();return{x:r.x+r.width/2,y:r.y+r.height/2}})()`);await call('Input.dispatchMouseEvent',{type:'mousePressed',button:'left',clickCount:1,x:r.x,y:r.y});await call('Input.dispatchMouseEvent',{type:'mouseReleased',button:'left',clickCount:1,x:r.x,y:r.y})}

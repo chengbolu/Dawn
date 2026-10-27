@@ -1,5 +1,5 @@
 /**
- * 诊断脚本：复刻 KAMUCL 启动逻辑，捕获 MC 真实崩溃输出
+ * 诊断脚本：复刻 DCL 启动逻辑，捕获 MC 真实崩溃输出
  * 用法: node scripts/debug-launch.mjs <versionId>
  */
 import fs from 'node:fs'
@@ -112,9 +112,9 @@ const vars = {
   clientid: '',
   auth_xuid: '',
   user_type: 'mojang',
-  version_type: 'KAMUCL-debug',
+  version_type: 'DCL-debug',
   natives_directory: nativesDir,
-  launcher_name: 'KAMUCL',
+  launcher_name: 'DCL',
   launcher_version: 'debug',
   classpath,
   library_directory: libRoot,

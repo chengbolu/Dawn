@@ -15,7 +15,7 @@ if (arch === 'x64') {
   env.MVK_CONFIG_USE_METAL_ARGUMENT_BUFFERS = '0'
   env.MVK_CONFIG_USE_MTLHEAP = '0'
 }
-const child = spawn(path.join(app, 'Contents/MacOS/KAMUCL'), ['--remote-debugging-port=9230', '--inspect=9231'], { env, stdio: ['ignore', log, log] })
+const child = spawn(path.join(app, 'Contents/MacOS/DCL'), ['--remote-debugging-port=9230', '--inspect=9231'], { env, stdio: ['ignore', log, log] })
 const wait = ms => new Promise(r => setTimeout(r, ms))
 let ws, mainWs, evaluate, gamePid, gameFolder, debuggerProcess, events = []
 async function connectRenderer() {
@@ -103,7 +103,7 @@ async function main() {
     }
     // launch PID is persisted by the real launcher; never discover/kill unrelated Java processes.
     if (!gamePid) {
-      const homes = [path.join(process.env.HOME, 'Library/Application Support/kamucl'), path.join(process.env.HOME, 'Library/Application Support/KAMUCL')]
+      const homes = [path.join(process.env.HOME, 'Library/Application Support/kamucl'), path.join(process.env.HOME, 'Library/Application Support/DCL')]
       for (const home of homes) {
         try { const info = JSON.parse(fs.readFileSync(path.join(home, 'running-game.json'), 'utf8')); if (info.versionId === installed.installedId) gamePid = info.pid } catch {}
       }

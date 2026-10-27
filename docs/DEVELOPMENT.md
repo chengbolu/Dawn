@@ -1,6 +1,6 @@
-# KAMUCL 开发指南
+# DCL 开发指南
 
-这份文档面向第一次参与 KAMUCL 开发的成员，目标是让你能快速启动项目、找到正确的代码层，并安全地提交一个功能改动。
+这份文档面向第一次参与 DCL 开发的成员，目标是让你能快速启动项目、找到正确的代码层，并安全地提交一个功能改动。
 
 ## 1. 环境准备
 
@@ -12,7 +12,7 @@
 
 ### 可选环境
 
-- JDK 17+：构建 KAMUCL Bridge MOD
+- JDK 17+：构建 DCL Bridge MOD
 - .NET Framework：构建 `native/` 下的 Windows 辅助程序（系统通常已自带 `csc.exe`）
 - Java：需要与目标 Minecraft 版本匹配；现代版本通常使用 Java 17 或 Java 21，具体实例可以在启动器中单独配置
 
@@ -152,7 +152,7 @@ Bridge 只监听 `127.0.0.1`，通过游戏目录中的 `.kamucl-bridge.json` �
 
 ## 8. 数据目录与调试
 
-默认用户数据目录是 Windows 的 `%APPDATA%\KAMUCL`（macOS 为 `~/Library/Application Support/KAMUCL`），设置文件位于 Electron `userData` 目录下。开发调试时建议使用独立临时目录，避免污染个人账号和游戏实例。
+默认用户数据目录是 Windows 的 `%APPDATA%\DCL`（macOS 为 `~/Library/Application Support/DCL`），设置文件位于 Electron `userData` 目录下。开发调试时建议使用独立临时目录，避免污染个人账号和游戏实例。
 
 调试重点：
 

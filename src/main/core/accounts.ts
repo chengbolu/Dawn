@@ -152,7 +152,7 @@ function load(): AccountsFile {
     try {
       persist()
     } catch (error) {
-      console.error('[KAMUCL] 账号凭据安全迁移失败，原文件保持不变:', error)
+      console.error('[DCL] 账号凭据安全迁移失败，原文件保持不变:', error)
     }
   }
   return cached

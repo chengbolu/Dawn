@@ -32,5 +32,5 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: KAMUCL-portable
-          path: release/KAMUCL-*.exe
+          name: DCL-portable
+          path: release/DCL-*.exe

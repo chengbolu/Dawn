@@ -873,7 +873,7 @@ async function onRemovePlugin(p: PluginInfo) {
         <div class="card group group-inline">
           <div>
             <h3 class="group-title">启动后关闭启动器</h3>
-            <p class="muted group-hint">游戏成功启动后自动退出 KAMUCL</p>
+            <p class="muted group-hint">游戏成功启动后自动退出 DCL</p>
           </div>
           <label class="switch">
             <input data-ui="SettingsView:f2f1ffcd2e84"

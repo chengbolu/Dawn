@@ -81,7 +81,7 @@ async function fetchOfficialNews(): Promise<MinecraftNewsItem[]> {
     signal: AbortSignal.timeout(REQUEST_TIMEOUT_MS),
     headers: {
       Accept: 'application/json',
-      'User-Agent': 'KAMUCL-Launcher'
+      'User-Agent': 'DCL-Launcher'
     }
   })
   if (!response.ok) throw new Error(`Minecraft 官网返回 HTTP ${response.status}`)

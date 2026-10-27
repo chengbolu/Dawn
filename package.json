@@ -1,7 +1,7 @@
 {
-  "name": "kamucl",
+  "name": "dcl",
   "productName": "Dawn Craft Launcher",
-  "version": "1.1.21",
+  "version": "1.1.22",
   "description": "Dawn Craft Launcher - 简约美观的一键式 Minecraft 启动器",
   "main": "out/main/index.js",
   "scripts": {
@@ -17,7 +17,7 @@
     "license:check": "node scripts/check-licenses.cjs"
   },
   "build": {
-    "appId": "com.kamucl.launcher",
+    "appId": "com.dawncraft.launcher",
     "productName": "Dawn Craft Launcher",
     "directories": {
       "output": "release"
@@ -76,7 +76,7 @@
         "portable",
         "zip"
       ],
-      "artifactName": "KAMUCL-${version}-windows-${arch}.${ext}",
+      "artifactName": "DCL-${version}-windows-${arch}.${ext}",
       "icon": "build/icon.ico"
     },
     "nsis": {
@@ -90,7 +90,7 @@
     },
     "portable": {
       "unpackDirName": false,
-      "artifactName": "KAMUCL-${version}.exe"
+      "artifactName": "DCL-${version}.exe"
     },
     "mac": {
       "minimumSystemVersion": "11.0.0",
@@ -100,7 +100,7 @@
       "category": "public.app-category.games",
       "icon": "build/icon-512.png",
       "identity": null,
-      "artifactName": "KAMUCL-${version}-mac-${arch}.${ext}"
+      "artifactName": "DCL-${version}-mac-${arch}.${ext}"
     }
   },
   "dependencies": {

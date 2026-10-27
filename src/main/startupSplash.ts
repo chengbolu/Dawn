@@ -7,7 +7,7 @@ import { awaitNativeStartup, createNativeStartup, showStartupWindow } from './na
 
 /** Startup-only window coordination. This does not own or terminate Minecraft processes. */
 export async function createStartupSplash() {
-  const signal = process.env.KAMUCL_BOOT_SIGNAL
+  const signal = process.env.DCL_BOOT_SIGNAL
   if (signal) {
     const pid = await awaitNativeStartup(signal)
     if (pid) return createNativeStartup(signal, pid)

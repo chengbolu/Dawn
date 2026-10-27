@@ -89,6 +89,6 @@ module.exports = async ({ evaluate, call, main, nav, wait, root, screenshot, ver
   assert(!await evaluate(`!!document.querySelector('[aria-label="使用自定义颜色 #1177ee"]')`),'custom colour is removed from the actual palette')
   settings = await preferencesReady('custom colour deletion persisted',p=>!p.custom.includes('#1177ee'))
   await edit('.palette-hex', '#d88c58'); await edit('.palette-alpha-number input', '100'); await evaluate(`document.querySelector('[aria-label="关闭绘制皮肤"]').click()`); await wait(500); await nav('home')
-  fs.writeFileSync('out/skin-palette-ui-'+(process.env.KAMUCL_TEST_THEME||'black-orange')+'.json', JSON.stringify({ version, synchronizedFields:true, invalidDrafts:true, noColourDirty:true, sameHalfTransparentPixelClean:true, textUndoPreserved:true, basePixels:inner, outerPixels:outer, outerRgba, pickedHex, pickAlpha:128/255, preferenceReadback:true, reopen:true, customDelete:true }, null, 2))
+  fs.writeFileSync('out/skin-palette-ui-'+(process.env.DCL_TEST_THEME||'black-orange')+'.json', JSON.stringify({ version, synchronizedFields:true, invalidDrafts:true, noColourDirty:true, sameHalfTransparentPixelClean:true, textUndoPreserved:true, basePixels:inner, outerPixels:outer, outerRgba, pickedHex, pickAlpha:128/255, preferenceReadback:true, reopen:true, customDelete:true }, null, 2))
   console.log('PASS flexible palette, real PNG alpha, pick synchronization, text undo and persisted swatches')
 }

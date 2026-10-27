@@ -32,7 +32,7 @@ app.on('browser-window-created', (_event, window) => {
   if (window.getTitle().includes('正在启动')) return
   if (process.argv.includes('--qa-small')) window.setSize(960, 620)
   window.on('show', () => {
-    window.setTitle('KAMUCL 0.6.8 · UI 验收')
+    window.setTitle('DCL 0.6.8 · UI 验收')
     // Read-only layout diagnostics; UI interactions are performed through the native window.
     window.webContents.executeJavaScript(`JSON.stringify({ dpr: devicePixelRatio, width: innerWidth, height: innerHeight, overflow: document.documentElement.scrollWidth > innerWidth, text: document.querySelector('.hero-metadata')?.textContent?.trim(), instances: [...document.querySelectorAll('.instance-copy strong')].map(e=>({text:e.textContent,title:e.title,width:e.getBoundingClientRect().width})) })`).then(value => console.log('QA_LAYOUT=' + value))
   })

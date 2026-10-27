@@ -3,11 +3,11 @@
 const fs = require('node:fs'), path = require('node:path'), os = require('node:os'), net = require('node:net')
 const assert = require('node:assert/strict'), crypto = require('node:crypto'), { spawn } = require('node:child_process')
 const version = require('../package.json').version, mc = process.argv[2] || '26.3'
-const root = fs.mkdtempSync(path.join(os.tmpdir(), 'KAMUCL download GUI ')), profile = path.join(root, 'profile'), game = path.join(root, 'game')
+const root = fs.mkdtempSync(path.join(os.tmpdir(), 'DCL download GUI ')), profile = path.join(root, 'profile'), game = path.join(root, 'game')
 fs.mkdirSync(profile); fs.mkdirSync(game)
 fs.writeFileSync(path.join(profile, 'settings.json'), JSON.stringify({ gameDir: game, activeFolder: game, folders: [{ path: game, name: '下载验证目录', isDefault: true }], autoUpdate: false, mirror: 'bmclapi', downloadThreads: 16, downloadSpeedKBps: 0, theme: 'black-orange' }))
-const exe = path.join(root, `KAMUCL-${version}.exe`)
-fs.copyFileSync(`release/KAMUCL-${version}.exe`, exe)
+const exe = path.join(root, `DCL-${version}.exe`)
+fs.copyFileSync(`release/DCL-${version}.exe`, exe)
 const wait = ms => new Promise(r => setTimeout(r, ms))
 ;(async () => {
   const socket = net.createServer(); await new Promise(r => socket.listen(0, '127.0.0.1', r))

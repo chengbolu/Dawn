@@ -34,7 +34,7 @@ export type ProgressEmit = (e: ProgressEvent) => void
 
 const errText = (e: unknown): string => (e instanceof Error ? e.message : String(e))
 
-const UA = { 'User-Agent': 'KAMUCL/0.4.0' }
+const UA = { 'User-Agent': 'DCL/0.4.0' }
 const TIMEOUT = 30000
 const requestSignal=new AsyncLocalStorage<AbortSignal>()
 export const withCommunitySignal=<T>(signal:AbortSignal|undefined,run:()=>Promise<T>):Promise<T>=>signal?requestSignal.run(signal,run):run()
@@ -188,12 +188,12 @@ function mapMrVersions(arr: MrVersion[], projectId?: string): CommunityFile[] {
 /** 官方 API（需 x-api-key，免费申请见设置页提示）；镜像为无 key 时的降级通道 */
 const CF_OFFICIAL = 'https://api.curseforge.com/v1'
 const CF_MIRROR = 'https://mod.mcimirror.top/curseforge/v1'
-/** 内置默认 Key（卡慕注册的 KAMUCL 官方应用 Key，开箱即用；用户可在设置页换成自己的） */
+/** 内置默认 Key（卡慕注册的 DCL 官方应用 Key，开箱即用；用户可在设置页换成自己的） */
 import { CF_BUILTIN_KEY } from './curseforgeKey'
 
 /** 当前生效的 CurseForge 通道：有 key（用户设置 > 内置默认）走官方；仅内置失效时才落镜像 */
 export function cfChannel(): { base: string; official: boolean; key: string } {
-  const key = (process.env.KAMUCL_CF_API_KEY || getSettings().curseforgeApiKey?.trim() || CF_BUILTIN_KEY).trim()
+  const key = (process.env.DCL_CF_API_KEY || getSettings().curseforgeApiKey?.trim() || CF_BUILTIN_KEY).trim()
   return key ? { base: CF_OFFICIAL, official: true, key } : { base: CF_MIRROR, official: false, key: '' }
 }
 

@@ -37,7 +37,7 @@ sealed class StartupFeedback : Form {
     System.Threading.Timer frameTimer; readonly object frameGate=new object();
     double nextFrame; int framePending; bool preciseTimer;
     readonly Bitmap face;
-    readonly string frameProbe=Environment.GetEnvironmentVariable("KAMUCL_FRAME_PROBE");
+    readonly string frameProbe=Environment.GetEnvironmentVariable("DCL_FRAME_PROBE");
     readonly List<double> frameTimes=new List<double>();
     Bitmap surface;IntPtr surfaceDC,surfaceImage,previousImage;
     sealed class Shard {
@@ -172,7 +172,7 @@ sealed class StartupFeedback : Form {
         EnsureSurface();PaintScene(surface,now);
         if(!Present(reveal<0?1:1-Smooth((now-reveal)/320))){Close();return;}
         if(!String.IsNullOrEmpty(frameProbe))frameTimes.Add(clock.Elapsed.TotalMilliseconds);
-        if(!reported){reported=true;Mark(".visible",Process.GetCurrentProcess().Id.ToString());var probe=Environment.GetEnvironmentVariable("KAMUCL_BOOT_PROBE");if(!String.IsNullOrEmpty(probe))try{File.WriteAllText(probe,DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());}catch{}}
+        if(!reported){reported=true;Mark(".visible",Process.GetCurrentProcess().Id.ToString());var probe=Environment.GetEnvironmentVariable("DCL_BOOT_PROBE");if(!String.IsNullOrEmpty(probe))try{File.WriteAllText(probe,DateTimeOffset.UtcNow.ToUnixTimeMilliseconds().ToString());}catch{}}
         if(!assembled&&command=="ready"&&convergence>=0&&now-convergence>=(reduced?0:ConvergeMilliseconds+HoldMilliseconds)){assembled=true;Mark(".assembled",reduced?"reduced":"ready");}
     }
     void Mark(string suffix,string value){try{File.WriteAllText(signal+suffix,value);}catch{}}

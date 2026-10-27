@@ -1,4 +1,5 @@
 import { app, BrowserWindow, crashReporter, shell, ipcMain, net, protocol } from 'electron'
+import { existsSync, renameSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { pathToFileURL } from 'node:url'
 import { createStartupSplash } from './startupSplash'
@@ -29,8 +30,21 @@ import { configureRuntimeGraphics } from './runtimeGraphics'
 
 configureRuntimeGraphics(app.commandLine, process.platform, dirname(process.execPath))
 
-// 品牌更名后继续复用原 KAMUCL 用户目录，避免账号、实例与设置看起来“丢失”。
-app.setPath('userData', join(app.getPath('appData'), 'KAMUCL'))
+// 正式使用 DCL 用户目录；首次升级时自动接管旧品牌目录，避免账号、设置和缓存丢失。
+const appDataDir = app.getPath('appData')
+const dclUserDataDir = join(appDataDir, 'DCL')
+const legacyUserDataDir = join(appDataDir, 'KAMUCL')
+let activeUserDataDir = dclUserDataDir
+if (!existsSync(dclUserDataDir) && existsSync(legacyUserDataDir)) {
+  try {
+    renameSync(legacyUserDataDir, dclUserDataDir)
+  } catch (error) {
+    // 迁移失败时继续使用旧目录，优先保证现有账户和设置可用。
+    activeUserDataDir = legacyUserDataDir
+    console.error('[DCL] 用户数据目录迁移失败，将暂时继续使用原目录：', error)
+  }
+}
+app.setPath('userData', activeUserDataDir)
 
 const launcherExitRecord = rememberExit(() => {
   exitHistory().reconcile()

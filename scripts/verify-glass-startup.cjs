@@ -4,7 +4,7 @@ const { app, BrowserWindow, screen } = require('electron'), { build } = require(
 const root = fs.mkdtempSync(path.resolve('out/glass-startup-'))
 const reduced = process.argv.includes('--reduced')
 app.setPath('userData', path.join(root, 'profile'))
-delete process.env.KAMUCL_BOOT_SIGNAL
+delete process.env.DCL_BOOT_SIGNAL
 const wait = ms => new Promise(r => setTimeout(r, ms))
 let overlay
 app.on('browser-window-created', (_event, window) => {

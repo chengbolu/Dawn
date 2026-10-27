@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: LGPL-3.0-only
-// VoxLink 721c7fae ModSync contract; KAMUCL instance and transactional download adaptation.
+// VoxLink 721c7fae ModSync contract; DCL instance and transactional download adaptation.
 import fs from 'node:fs'
 import path from 'node:path'
 import os from 'node:os'

@@ -2,9 +2,9 @@
 // terminated on timeout; no enumeration/signals to user games or profiles.
 const fs=require('node:fs'),path=require('node:path'),os=require('node:os'),assert=require('node:assert/strict'),net=require('node:net');
 const {spawn,spawnSync}=require('node:child_process');
-const root=fs.mkdtempSync(path.join(os.tmpdir(),'KAMUCL bridge exit 中文 '));
+const root=fs.mkdtempSync(path.join(os.tmpdir(),'DCL bridge exit 中文 '));
 const baseline=process.argv.includes('--baseline');
-const jar=path.resolve(process.env.KAMUCL_BRIDGE_JAR||(baseline?'tests/fixtures/kamucl-bridge-1.0.0.jar':'bridge/dist/kamucl-bridge-1.0.1.jar'));
+const jar=path.resolve(process.env.DCL_BRIDGE_JAR||(baseline?'tests/fixtures/kamucl-bridge-1.0.0.jar':'bridge/dist/kamucl-bridge-1.0.1.jar'));
 const tool=n=>process.env.JAVA_HOME?path.join(process.env.JAVA_HOME,'bin',n+(process.platform==='win32'?'.exe':'')):n;
 const cp=[root,jar,path.resolve('bridge/.cache/gson-2.14.0.jar')].join(path.delimiter);
 const compile=spawnSync(tool('javac'),['-encoding','UTF-8','--release','17','-cp',cp,'-d',root,'tests/fixtures/BridgeExitFixture.java'],{encoding:'utf8',windowsHide:true});
